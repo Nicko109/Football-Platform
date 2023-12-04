@@ -28,7 +28,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        $players = Player::all();
+        $players = Player::where('is_active', false)->get();
 
         return view('teams.create', compact('players'));
     }
@@ -50,9 +50,8 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        $user = Auth::user();
-        $playerQuery = Player::where('user_id', $user->id);
-        $players = $playerQuery->paginate(10);
+
+        $players = $team->players()->latest()->get();
         return view('teams.show', compact('team', 'players'));
     }
 
@@ -61,7 +60,14 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
-        return view('teams.edit', compact('team'));
+        // Получаем список всех игроков и идентификаторы игроков команды
+        $allPlayers = Player::all();
+        $teamPlayerIds = $team->players->pluck('id')->toArray();
+
+        // Получаем список неактивных игроков и идентификаторы
+        $inactivePlayers = Player::where('is_active', false)->get();
+
+        return view('teams.edit', compact('team', 'allPlayers', 'teamPlayerIds', 'inactivePlayers'));
     }
 
     /**
@@ -70,7 +76,8 @@ class TeamController extends Controller
     public function update(UpdateTeamRequest $request, Team $team)
     {
         $data = $request->validated();
-        TeamService::update($team, $data);
+        $previousPlayerIds = $team->players->pluck('id')->toArray();
+        TeamService::update($team, $data, $previousPlayerIds);
 
         return redirect()->route('admin.teams.show', compact('team'));
 

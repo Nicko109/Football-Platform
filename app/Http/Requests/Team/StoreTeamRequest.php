@@ -25,7 +25,8 @@ class StoreTeamRequest extends FormRequest
             'title' => 'required|string',
             'points' => 'nullable|int',
             'is_active' => 'nullable|boolean',
-            'player_id' => 'required|integer|exists:players,id',
+            'player_id' => 'required|array',
+            'player_id.*' => 'integer|exists:players,id',
         ];
     }
 

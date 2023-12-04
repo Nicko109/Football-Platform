@@ -34,6 +34,27 @@
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label>Выберите игроков команды</label>
+                            <select name="player_id[]" class="form-control" multiple style="height: 200px;">
+                                @foreach($allPlayers as $player)
+                                    @if(in_array($player->id, $teamPlayerIds))
+                                        <option selected value="{{ $player->id }}">{{ $player->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Выберите неактивных игроков</label>
+                            <select name="player_id[]" class="form-control" multiple style="height: 200px;">
+                                @foreach($inactivePlayers as $player)
+                                    <option value="{{ $player->id }}" {{ in_array($player->id, (array) old('player_id')) ? 'selected' : '' }}>
+                                        {{ $player->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group mt-3">
                             <input type="submit" class="btn btn-success" value="Редактировать">
                         </div>
@@ -41,6 +62,7 @@
                             <a href="{{ route('admin.teams.show', $team->id) }}" class="btn btn-primary">Назад</a>
                         </div>
                     </form>
+                </div>
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->

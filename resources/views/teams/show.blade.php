@@ -33,7 +33,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Имя</th>
+                                    <th>Команда</th>
                                     <th>Очки</th>
                                 </tr>
                                 </thead>
@@ -46,15 +46,19 @@
                                 </tbody>
                             </table>
                             <table class="table table-hover text-wrap">
-                                <thead>
+                                <thead class="mt-4">
                                 <tr>
-                                    <th>Имя Игроков</th>
+                                    <th>ID</th>
+                                    <th>Имя Игрока</th>
+                                    <th>Голы</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($players as $player)
                                 <tr>
+                                    <td>{{ $player->id }}</td>
                                     <td>{{ $player->name }}</td>
+                                    <td>{{ $player->goals }}</td>
                                 </tr>
                                 @endforeach
                                 </tbody>

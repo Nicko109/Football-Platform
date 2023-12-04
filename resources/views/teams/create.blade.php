@@ -35,12 +35,12 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Выберите игрока</label>
-                            <select name="player_id" class="form-control">
+                            <label>Выберите игроков</label>
+                            <select name="player_id[]" class="form-control" multiple class="select2" style="height: 300px;">
                                 @foreach($players as $player)
-                                    <option value="{{ $player->id }}"
-                                            {{ $player->id == old('player_id') ? 'selected' : ''}}
-                                    >{{ $player->name }}</option>
+                                    <option value="{{ $player->id }}" {{ in_array($player->id, (array) old('player_id')) ? 'selected' : '' }}>
+                                        {{ $player->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('player_id')
