@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-between p-8 max-w-screen-md w-full mx-auto">
         <div class="form-group mb-4">
-            <Link :href="route('notes.index')" class="inline-block bg-sky-600 px-3 py-2 text-white">Заметки</Link>
+            <Link :href="route('players.index')" class="inline-block bg-sky-600 px-3 py-2 text-white">Игроки</Link>
         </div>
         <div v-if="isAdmin" class="form-group mb-4">
             <a :href="route('admin.main.index')" class="inline-block bg-orange-600 px-3 py-2 text-white">Админ</a>

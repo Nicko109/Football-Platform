@@ -62,12 +62,6 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{ route('admin.notes.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-clipboard"></i>
-                            <p>Заметки</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ route('admin.players.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>Игроки</p>
@@ -80,8 +74,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.games.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-gamepad"></i>
+                            <p>Игры</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('admin.users.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
+                            <i class="nav-icon fas fa-user"></i>
                             <p>Пользователи</p>
                         </a>
                     </li>

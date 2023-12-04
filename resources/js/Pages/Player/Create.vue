@@ -1,11 +1,11 @@
 <template>
     <div class="max-w-screen-md w-full mx-auto">
     <div class="form-group mb-4">
-        <Link :href="route('notes.index')" class="inline-block bg-sky-600 px-3 py-2 text-white">Назад</Link>
+        <Link :href="route('players.index')" class="inline-block bg-sky-600 px-3 py-2 text-white">Назад</Link>
     </div>
     <div class="mb-4">
-        <textarea rows="8" cols="80" v-model="title" class="border-gray-300 mt-1 p-2 w-full border rounded-md"  type="text" placeholder="Добавить заметку"></textarea>
-        <div v-if="errors.title" class="text-red-600 text-sm">{{ errors.title }}</div>
+        <input v-model="name" class="border-gray-300 mt-1 p-2 w-full border rounded-md"  type="text" placeholder="Добавить игрока">
+        <div v-if="errors.name" class="text-red-600 text-sm">{{ errors.name }}</div>
     </div>
     <div class="form-group mb-4">
         <a @click.prevent="store" href="#" class="inline-block bg-sky-600 px-3 py-2 text-white">Добавить</a>
@@ -31,13 +31,13 @@ export default {
 
     data() {
         return {
-            title: '',
+            name: '',
         }
     },
 
     methods: {
         store() {
-            router.post('/notes', {title: this.title})
+            router.post('/players', {name: this.name})
         }
     }
 

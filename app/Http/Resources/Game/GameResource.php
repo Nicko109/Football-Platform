@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Note;
+namespace App\Http\Resources\Game;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NoteResource extends JsonResource
+class GameResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,11 @@ class NoteResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'date' => $this->created_at->diffForHumans(),
+            'date' => $this->date,
+            'score' => $this->score,
+            'points' => $this->points,
+            'win' => $this->win,
+            'is_active' => $this->is_active,
         ];
     }
 }

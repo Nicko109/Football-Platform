@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Game;
 use App\Models\Note;
 use App\Models\Player;
 use App\Models\Post;
@@ -21,6 +22,7 @@ class IndexController extends Controller
         $data['notesCount'] = Note::all()->count();
         $data['playersCount'] = Player::all()->count();
         $data['teamsCount'] = Team::all()->count();
+        $data['gamesCount'] = Game::all()->count();
 
         return view('main.index',compact('data'));
     }

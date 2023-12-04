@@ -19,4 +19,9 @@ class Team extends Model
         return $this->belongsToMany(Player::class);
     }
 
+    public function game()
+    {
+        return $this->hasOne(Game::class);
+    }
+
 }

@@ -10,7 +10,7 @@ class PlayerService
 {
     public static function index()
     {
-        $players = Player::paginate(15);
+        $players = Player::latest()->get();
 
         return $players;
     }

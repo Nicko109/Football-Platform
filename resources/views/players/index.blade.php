@@ -35,6 +35,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Имя</th>
+                                    <th>Голы</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -42,13 +43,11 @@
                                     <tr>
                                         <td>{{ $player->id }}</td>
                                         <td><a  href="{{ route('admin.players.show', $player->id) }}">{{ $player->name }}</a></td>
+                                        <td>{{ $player->goals }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div>
-                                {{ $players->withQueryString()->links() }}
-                            </div>
                         </div>
 
                     </div>

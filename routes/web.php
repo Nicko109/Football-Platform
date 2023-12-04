@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
 Route::get('/main', [\App\Http\Controllers\Main\Main\IndexController::class, 'index'])->name('main.index');
-Route::resource('/notes', \App\Http\Controllers\Main\Note\NoteController::class);
+Route::resource('/players', \App\Http\Controllers\Main\Player\PlayerController::class);
 
 });
 
@@ -53,9 +53,9 @@ Route::group([
 ], function () {
     Route::get('/', [\App\Http\Controllers\Admin\Main\IndexController::class, 'index'])->name('main.index');
 
-    Route::resource('/notes', \App\Http\Controllers\Admin\Note\NoteController::class);
     Route::resource('/players', \App\Http\Controllers\Admin\Player\PlayerController::class);
     Route::resource('/teams', \App\Http\Controllers\Admin\Team\TeamController::class);
+    Route::resource('/games', \App\Http\Controllers\Admin\Game\GameController::class);
     Route::resource('/users', \App\Http\Controllers\Admin\User\UserController::class);
 });
 
