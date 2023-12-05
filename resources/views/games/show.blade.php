@@ -111,7 +111,10 @@
 
             <div class="card-header d-flex p-3">
                 <div class="mr-4">
-                    <a href="{{ route('admin.games.edit', $game->id) }}" class="btn btn-success">Редактировать</a>
+                    <a href="{{ route('admin.games.edit', $game->id) }}" class="btn btn-primary">Играть</a>
+                </div>
+                <div class="mr-4">
+                    <a href="{{ route('admin.games.editDetails', $game->id) }}" class="btn btn-success">Редактировать</a>
                 </div>
                 <form action="{{ route('admin.games.destroy', $game->id) }}" method="post">
                     @csrf

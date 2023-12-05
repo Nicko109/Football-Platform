@@ -56,6 +56,11 @@ Route::group([
     Route::resource('/players', \App\Http\Controllers\Admin\Player\PlayerController::class);
     Route::resource('/teams', \App\Http\Controllers\Admin\Team\TeamController::class);
     Route::resource('/games', \App\Http\Controllers\Admin\Game\GameController::class);
+    Route::get('/games/{game}/edit-details', [\App\Http\Controllers\Admin\Game\GameController::class, 'editDetails'])
+        ->name('games.editDetails');
+    Route::patch('/games/{game}/update-details', [\App\Http\Controllers\Admin\Game\GameController::class, 'updateDetails'])
+        ->name('games.updateDetails');
+
     Route::resource('/users', \App\Http\Controllers\Admin\User\UserController::class);
 });
 

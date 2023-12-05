@@ -18,14 +18,10 @@ class GameService
 
 
 
-    public static function store(array $data, $winningTeamId = null) : Game
+    public static function store(array $data) : Game
     {
         $game = Game::create($data);
 
-        // Добавляем информацию о победителе, если она предоставлена
-        if (!is_null($winningTeamId)) {
-            $game->update(['win' => $winningTeamId]);
-        }
 
         return $game;
     }
@@ -54,6 +50,9 @@ class GameService
 
         if (!is_null($winningTeamId)) {
             $game->win = $winningTeamId;
+            $game->is_active = true; // Устанавливаем is_active в true, если есть победитель
+        } else {
+            $game->is_active = false; // Если нет победителя, то матч неактивен
         }
 
         $game->save();
@@ -87,4 +86,12 @@ class GameService
     {
         return $game->delete();
     }
+
+
+    public static function updateDetails(Game $game, array $data)
+    {
+        return $game->update($data);
+    }
+
+
 }

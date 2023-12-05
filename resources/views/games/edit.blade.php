@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="form-group mt-3">
-                            <input type="submit" class="btn btn-success" value="Редактировать">
+                            <input type="submit" class="btn btn-primary" value="Играть">
                         </div>
                         <div class="mr-4">
                             <a href="{{ route('admin.games.show', $game->id) }}" class="btn btn-primary">Назад</a>

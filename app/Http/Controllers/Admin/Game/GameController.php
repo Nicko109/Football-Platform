@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Game;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Game\UpdateGameDetailsRequest;
 use App\Models\Game;
 use App\Http\Requests\Game\StoreGameRequest;
 use App\Http\Requests\Game\UpdateGameRequest;
@@ -39,18 +40,8 @@ class GameController extends Controller
     public function store(StoreGameRequest $request)
     {
         $data = $request->validated();
-        $teamId = $request->input('team_id');
-        $opponentId = $request->input('opponent_id');
 
-        if ($request->win == 'team_id') {
-            $winningTeamId = $teamId;
-        } elseif ($request->win == 'opponent_id') {
-            $winningTeamId = $opponentId;
-        } else {
-            $winningTeamId = null;
-        }
-
-        $game = GameService::store($data, $winningTeamId);
+        $game = GameService::store($data);
 
         $game->save();
 
@@ -95,5 +86,20 @@ class GameController extends Controller
 
         return redirect()->route('admin.games.index');
 
+    }
+
+    public function editDetails(Game $game)
+    {
+        $teams = Team::all();
+        return view('games.edit-details', compact('game', 'teams'));
+    }
+
+    public function updateDetails(UpdateGameDetailsRequest $request, Game $game)
+    {
+        $data = $request->validated();
+
+        GameService::updateDetails($game, $data);
+
+        return redirect()->route('admin.games.show', compact('game'));
     }
 }
