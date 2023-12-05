@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('goals')->default(0);
             $table->boolean('is_active')->default(false);
             $table->timestamps();
             $table->softDeletes();

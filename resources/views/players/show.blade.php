@@ -41,7 +41,7 @@
                                 <tr>
                                     <td>{{ $player->id }}</td>
                                     <td class="text-wrap">{{ $player->name }}</td>
-                                    <td class="text-wrap">{{ $player->goals }}</td>
+                                    <td class="text-wrap">{{ $player->goalsAll() }}</td>
                                 </tr>
                                 </tbody>
                             </table>

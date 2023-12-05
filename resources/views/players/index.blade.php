@@ -43,7 +43,7 @@
                                     <tr>
                                         <td>{{ $player->id }}</td>
                                         <td><a  href="{{ route('admin.players.show', $player->id) }}">{{ $player->name }}</a></td>
-                                        <td>{{ $player->goals }}</td>
+                                        <td class="text-wrap">{{ $player->goalsAll() }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

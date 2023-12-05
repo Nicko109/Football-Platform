@@ -35,6 +35,7 @@
                                     <th>ID</th>
                                     <th>Дата игры</th>
                                     <th>Название игры</th>
+                                    <th>Cчёт</th>
                                     <th>Победитель</th>
                                 </tr>
                                 </thead>
@@ -42,7 +43,8 @@
                                 <tr>
                                     <td>{{ $game->id }}</td>
                                     <td>{{ $game->date }}</td>
-                                    <td>{{ $game->team->title }} - {{ $game->opponent->title }}</a></td>
+                                    <td>{{ $game->team->title }}  - {{ $game->opponent->title }}</a></td>
+                                    <td>{{ $game->teamGoalsCount() }}  - {{ $game->opponentGoalsCount() }}</a></td>
                                     <td>{{ $game->win }}</td>
                                 </tr>
                                 </tbody>
@@ -53,6 +55,60 @@
 
                 </div>
             </div>
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h3 class="card-title">Состав команды {{ $game->team->title }}</h3>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-wrap">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Имя игрока</th>
+                            <th>Забитых голов</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($game->team->players as $player)
+                            <tr>
+                                <td>{{ $player->id }}</td>
+                                <td>{{ $player->name }}</td>
+                                <td>{{ $player->goalsInGame($game) }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Display roster of the second team -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h3 class="card-title">Состав команды {{ $game->opponent->title }}</h3>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-wrap">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Имя игрока</th>
+                            <th>Забитых голов</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($game->opponent->players as $player)
+                            <tr>
+                                <td>{{ $player->id }}</td>
+                                <td>{{ $player->name }}</td>
+                                <td>{{ $player->goalsInGame($game) }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
             <div class="card-header d-flex p-3">
                 <div class="mr-4">
                     <a href="{{ route('admin.games.edit', $game->id) }}" class="btn btn-success">Редактировать</a>

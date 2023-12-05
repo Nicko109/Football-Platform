@@ -36,6 +36,7 @@
                                     <th>ID</th>
                                     <th>Дата игры</th>
                                     <th>Название игры</th>
+                                    <th>Cчёт</th>
                                     <th>Победитель</th>
                                 </tr>
                                 </thead>
@@ -45,6 +46,7 @@
                                         <td>{{ $game->id }}</td>
                                         <td>{{ $game->date }}</td>
                                         <td><a href="{{ route('admin.games.show', $game->id) }}">{{ $game->team->title }} - {{ $game->opponent->title }}</a></td>
+                                        <td>{{ $game->teamGoalsCount() }}  - {{ $game->opponentGoalsCount() }}</a></td>
                                         <td>{{ $game->win }}</td>
                                     </tr>
                                 @endforeach

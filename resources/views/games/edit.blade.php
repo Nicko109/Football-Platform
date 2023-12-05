@@ -20,72 +20,74 @@
 
     <!-- Main content -->
     <section class="content">
+        <form action="{{route('admin.games.update', $game->id)}}" method="post">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-6 col-12">
-                    <form action="{{route('admin.games.update', $game->id)}}" method="post">
+
                         @csrf
                         @method('patch')
-                        <div class="form-group w-25">
-                            <label for="date">Дата игры</label>
-                            <div class="input-group">
-                                <input type="date" class="form-control" name="date" id="date"
-                                       value="{{$game->date}}">
+                        <div class="form-group w-50">
+                            <label>{{$game->team->title}}</label>
+                        </div>
+                        <div class="form-group w-50">
+                            <label>Голы команды {{$game->team->title}}</label>
+                            @foreach($game->team->players as $player)
+                                <div class="mb-2 d-flex align-items-center">
+                                    <input type="text" name="goals[{{ $game->team->id }}][{{ $player->id }}]" class="form-control w-25" placeholder="Голы"/>
+                                    <label class="ml-3">{{ $player->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="form-group w-50 d-flex flex-column">
+                            <div class="d-flex justify-content-between">
+                                <label for="date">Дата игры</label>
+                                <label class="mt-2">Выберите победителя</label>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="input-group">
+                                    <input type="date" class="form-control" name="date" id="date" value="{{$game->date}}">
+                                </div>
+                                <select name="win" class="form-control ml-3">
+                                    <option value="null" selected>Ничья</option>
+                                    <option value="team_id">{{$game->team->title}}</option>
+                                    <option value="opponent_id">{{$game->opponent->title}}</option>
+                                </select>
                             </div>
                             @error('date')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
-                        </div>
-                        <div class="form-group w-50">
-                            <label>Выберите первую команду</label>
-                            <select name="team_id" class="form-control">
-                                @foreach($teams as $team)
-                                    <option value="{{ $team->id }}" {{ $team->id == $game->team_id ? 'selected' : '' }}>
-                                        {{ $team->title }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('team_id')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group w-50">
-                            <label>Выберите вторую команду</label>
-                            <select name="opponent_id" class="form-control">
-                                @foreach($teams as $team)
-                                    <option value="{{ $team->id }}" {{ $team->id == $game->opponent_id ? 'selected' : '' }}>
-                                        {{ $team->title }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('opponent_id')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group w-50">
-                            <label>Выберите победителя</label>
-                            <select name="win" class="form-control">
-                                <option value="null" selected>Ничья</option>
-                                <option value="team_id">Победит первая команда</option>
-                                <option value="opponent_id">Победит вторая команда</option>
-                            </select>
                             @error('win')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="form-group mt-3">
                             <input type="submit" class="btn btn-success" value="Редактировать">
                         </div>
                         <div class="mr-4">
                             <a href="{{ route('admin.games.show', $game->id) }}" class="btn btn-primary">Назад</a>
                         </div>
-                    </form>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <div class="form-group w-50">
+                        <label>{{$game->opponent->title}}</label>
+                    </div>
+                    <div class="form-group w-50">
+                        <label>Голы команды {{$game->opponent->title}}</label>
+                        @foreach($game->opponent->players as $player)
+                            <div class="mb-2 d-flex align-items-center">
+                                <input type="text" name="goals[{{ $game->opponent->id }}][{{ $player->id }}]" class="form-control w-25" placeholder="Голы"/>
+                                <label class="ml-3">{{ $player->name }}</label>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+        </form>
     </section>
     <!-- /.content -->
 @endsection

@@ -34,18 +34,19 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Команда</th>
-                                    <th>Очки</th>
+                                    <th>Голы</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td>{{ $team->id }}</td>
                                     <td class="text-wrap">{{ $team->title }}</td>
-                                    <td class="text-wrap">{{ $team->points }}</td>
+                                    <td class="text-wrap">{{ $team->goalsAll() }}</td>
                                 </tr>
                                 </tbody>
                             </table>
                             <table class="table table-hover text-wrap">
+                                <label class="ml-3 mt-5">Cостав</label>
                                 <thead class="mt-4">
                                 <tr>
                                     <th>ID</th>
@@ -58,7 +59,7 @@
                                 <tr>
                                     <td>{{ $player->id }}</td>
                                     <td>{{ $player->name }}</td>
-                                    <td>{{ $player->goals }}</td>
+                                    <td>{{ $player->goalsAll() }}</td>
                                 </tr>
                                 @endforeach
                                 </tbody>

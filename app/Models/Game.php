@@ -31,4 +31,20 @@ class Game extends Model
             return 'Ничья'; // Если 'win' не содержит team_id
         }
     }
+
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
+
+    public function teamGoalsCount()
+    {
+        return $this->goals()->where('team_id', $this->team_id)->sum('count');
+    }
+
+    public function opponentGoalsCount()
+    {
+        return $this->goals()->where('team_id', $this->opponent_id)->sum('count');
+    }
+
 }

@@ -35,6 +35,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Название команды</th>
+                                    <th>Голы</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -42,6 +43,7 @@
                                     <tr>
                                         <td>{{ $team->id }}</td>
                                         <td><a  href="{{ route('admin.teams.show', $team->id) }}">{{ $team->title }}</a></td>
+                                        <td class="text-wrap">{{ $team->goalsAll() }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

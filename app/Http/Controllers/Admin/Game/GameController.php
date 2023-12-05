@@ -25,9 +25,10 @@ class GameController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Game $game)
     {
         $teams = Team::all();
+
 
         return view('games.create', compact('teams'));
     }
@@ -79,9 +80,8 @@ class GameController extends Controller
     public function update(UpdateGameRequest $request, Game $game)
     {
         $data = $request->validated();
-
-        GameService::update($game, $data);
-
+        $goals = $request->input('goals', []);
+        GameService::update($game, $data, $goals);
         return redirect()->route('admin.games.show', compact('game'));
 
     }

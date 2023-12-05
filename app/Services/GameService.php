@@ -38,7 +38,7 @@ class GameService
 
 
 
-    public static function update(Game $game, array $data)
+    public static function update(Game $game, array $data, array $goals)
     {
         $teamId = $game->team_id;
         $opponentId = $game->opponent_id;
@@ -57,6 +57,28 @@ class GameService
         }
 
         $game->save();
+
+
+        foreach ($goals as $teamId => $teamGoals) {
+            foreach ($teamGoals as $playerId => $goalCount) {
+                // Создаем или обновляем гол только для указанной команды
+                \App\Models\Goal::updateOrCreate(
+                    ['game_id' => $game->id, 'player_id' => $playerId, 'team_id' => $teamId],
+                    ['count' => $goalCount]
+                );
+            }
+        }
+
+        foreach ($goals as $opponentId => $teamGoals) {
+            foreach ($teamGoals as $playerId => $goalCount) {
+                // Создаем или обновляем гол только для указанной команды
+                \App\Models\Goal::updateOrCreate(
+                    ['game_id' => $game->id, 'player_id' => $playerId, 'team_id' => $opponentId],
+                    ['count' => $goalCount]
+                );
+            }
+        }
+
 
         return $game;
     }

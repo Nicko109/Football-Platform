@@ -19,7 +19,6 @@ class IndexController extends Controller
         $data = [];
 
         $data['usersCount'] = User::all()->count();
-        $data['notesCount'] = Note::all()->count();
         $data['playersCount'] = Player::all()->count();
         $data['teamsCount'] = Team::all()->count();
         $data['gamesCount'] = Game::all()->count();

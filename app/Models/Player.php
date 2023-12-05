@@ -18,6 +18,20 @@ class Player extends Model
         return $this->belongsToMany(Team::class);
     }
 
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
+
+    public function goalsInGame(Game $game)
+    {
+        return $this->goals()->where('game_id', $game->id)->sum('count');
+    }
+
+    public function goalsAll()
+    {
+        return $this->goals()->sum('count');
+    }
 
 
 }

@@ -27,8 +27,8 @@ class UpdateGameRequest extends FormRequest
             'score' => 'nullable|int',
             'points' => 'nullable|int',
             'win' => 'required|in:team_id,opponent_id,null',
-            'team_id' => 'required|integer|exists:teams,id',
-            'opponent_id' => 'required|different:team_id|exists:teams,id',
+            'team_id' => 'nullable|integer|exists:teams,id',
+            'opponent_id' => 'nullable|different:team_id|exists:teams,id',
         ];
     }
 

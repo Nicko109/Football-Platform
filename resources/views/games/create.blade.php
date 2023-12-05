@@ -49,7 +49,6 @@
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="form-group w-50">
                             <label>Выберите вторую команду</label>
                             <select name="opponent_id" class="form-control">

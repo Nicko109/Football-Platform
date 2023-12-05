@@ -24,4 +24,14 @@ class Team extends Model
         return $this->hasOne(Game::class);
     }
 
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
+
+    public function goalsAll()
+    {
+        return $this->goals()->sum('count');
+    }
+
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('player_id')->nullable()->index()->constrained('players');
             $table->foreignId('team_id')->nullable()->index()->constrained('teams');
+            $table->integer('score')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
