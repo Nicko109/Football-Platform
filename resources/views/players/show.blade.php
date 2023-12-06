@@ -49,10 +49,16 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            @if(!is_null($player->meta))
+                            @foreach($player->meta as $key => $value)
+                                <p><b>{{$key}}</b> {{$value}}</p>
+                            @endforeach
+                                @endif
                         </div>
-
+                        @if(!is_null($player->image))
+                        <div><img src="{{$player->image}}" alt="{{$player->name}}"></div>
+                        @endif
                     </div>
-
                 </div>
             </div>
             <div class="card-header d-flex p-3">

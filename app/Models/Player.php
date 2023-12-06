@@ -12,6 +12,9 @@ class Player extends Model
 
     protected $guarded = false;
 
+    protected $casts = [
+        'meta' => 'array'
+    ];
 
     public function teams()
     {
@@ -32,6 +35,7 @@ class Player extends Model
     {
         return $this->goals()->sum('count');
     }
+
 
 
 }
