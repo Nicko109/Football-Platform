@@ -44,8 +44,13 @@
                                     <td>{{ $game->id }}</td>
                                     <td>{{ $game->date }}</td>
                                     <td>{{ $game->team->title }}  - {{ $game->opponent->title }}</a></td>
-                                    <td>{{ $game->teamGoalsCount() }}  - {{ $game->opponentGoalsCount() }}</a></td>
-                                    <td>{{ $game->win }}</td>
+                                    @if($game->is_active)
+                                        <td>{{ $game->teamGoalsCount() }}  - {{ $game->opponentGoalsCount() }}</a></td>
+                                        <td>{{ $game->win }}</td>
+                                    @else
+                                        <td>Матч не сыгран</td>
+                                        <td>Матч не сыгран</td>
+                                    @endif
                                 </tr>
                                 </tbody>
                             </table>

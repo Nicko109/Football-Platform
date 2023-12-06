@@ -8,7 +8,7 @@ class UserService
 {
     public static function index()
     {
-        return User::latest()->get();
+        return User::paginate(15);
     }
 
     public static function store(array $data) : User

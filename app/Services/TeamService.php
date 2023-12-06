@@ -11,7 +11,7 @@ class TeamService
 {
     public static function index()
     {
-        $teams = Team::latest()->get();
+        $teams = Team::paginate(15);
 
 
         return $teams;

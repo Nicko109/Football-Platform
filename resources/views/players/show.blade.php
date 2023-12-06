@@ -34,6 +34,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Имя</th>
+                                    <th>Команда</th>
                                     <th>Голы</th>
                                 </tr>
                                 </thead>
@@ -41,6 +42,9 @@
                                 <tr>
                                     <td>{{ $player->id }}</td>
                                     <td class="text-wrap">{{ $player->name }}</td>
+                                    @foreach($teams as $team)
+                                        <td class="text-wrap">{{ $team->title }}</td>
+                                    @endforeach
                                     <td class="text-wrap">{{ $player->goalsAll() }}</td>
                                 </tr>
                                 </tbody>

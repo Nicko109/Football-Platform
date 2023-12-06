@@ -84,14 +84,44 @@ class GameService
 
     public static function destroy(Game $game)
     {
+        $game->goals()->delete();
+        foreach ($game->team->players as $player) {
+            $player->goals()->where('game_id', $game->id)->delete();
+        }
+
+        foreach ($game->opponent->players as $player) {
+            $player->goals()->where('game_id', $game->id)->delete();
+        }
+
+        // Обновляем статистику для каждой команды
+        $game->team->goals()->where('game_id', $game->id)->delete();
+        $game->opponent->goals()->where('game_id', $game->id)->delete();
         return $game->delete();
     }
 
 
     public static function updateDetails(Game $game, array $data)
     {
-        return $game->update($data);
+        // Удаляем все голы для данной игры
+        $game->goals()->delete();
+
+        // Обновляем статус игры
+        $game->is_active = false;
+        $game->update($data);
+
+        // Удаляем голы и обновляем статистику для каждого игрока
+        foreach ($game->team->players as $player) {
+            $player->goals()->where('game_id', $game->id)->delete();
+        }
+
+        foreach ($game->opponent->players as $player) {
+            $player->goals()->where('game_id', $game->id)->delete();
+        }
+
+        // Обновляем статистику для каждой команды
+        $game->team->goals()->where('game_id', $game->id)->delete();
+        $game->opponent->goals()->where('game_id', $game->id)->delete();
+
+        return $game;
     }
-
-
 }

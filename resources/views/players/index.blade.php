@@ -35,6 +35,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Имя</th>
+                                    <th>Команда</th>
                                     <th>Голы</th>
                                 </tr>
                                 </thead>
@@ -43,11 +44,17 @@
                                     <tr>
                                         <td>{{ $player->id }}</td>
                                         <td><a  href="{{ route('admin.players.show', $player->id) }}">{{ $player->name }}</a></td>
+                                        @foreach($player->teams as $team)
+                                            <td class="text-wrap">{{ $team->title }}</td>
+                                        @endforeach
                                         <td class="text-wrap">{{ $player->goalsAll() }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                            <div>
+                                {{ $players->withQueryString()->links() }}
+                            </div>
                         </div>
 
                     </div>

@@ -51,7 +51,7 @@ class TeamController extends Controller
     public function show(Team $team)
     {
 
-        $players = $team->players()->latest()->get();
+        $players = $team->players()->get();
         return view('teams.show', compact('team', 'players'));
     }
 

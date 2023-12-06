@@ -48,6 +48,9 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <div>
+                                {{ $users->withQueryString()->links() }}
+                            </div>
                         </div>
 
                     </div>
