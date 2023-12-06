@@ -16,9 +16,7 @@ class GameService
     }
 
 
-
-
-    public static function store(array $data) : Game
+    public static function store(array $data): Game
     {
         $game = Game::create($data);
 
@@ -33,11 +31,13 @@ class GameService
     }
 
 
-
     public static function update(Game $game, array $data, array $goals)
     {
-        $game->is_active = true;
-        $game->save();
+
+
+
+
+
 
         foreach ($goals as $teamId => $teamGoals) {
             foreach ($teamGoals as $playerId => $goalCount) {
@@ -61,16 +61,24 @@ class GameService
 
 
         if ($game->teamGoalsCount() > $game->opponentGoalsCount()) {
+            $game->win = $game->team_id;
+            $game->lose = $game->opponent_id;
             $game->team->points += 3;
         } elseif ($game->teamGoalsCount() < $game->opponentGoalsCount()) {
+            $game->lose = $game->team_id;
+            $game->win = $game->opponent_id;
             $game->opponent->points += 3;
         } else {
+            $game->draw = 'draw';
             $game->team->points += 1;
             $game->opponent->points += 1;
         }
 
+        $game->fill($data);
+        $game->is_active = true;
         $game->team->save();
         $game->opponent->save();
+        $game->save();
 
 
         return $game;
@@ -78,45 +86,13 @@ class GameService
 
     public static function destroy(Game $game)
     {
-        $game->goals()->delete();
-        foreach ($game->team->players as $player) {
-            $player->goals()->where('game_id', $game->id)->delete();
-        }
-
-        foreach ($game->opponent->players as $player) {
-            $player->goals()->where('game_id', $game->id)->delete();
-        }
-
-        // Обновляем статистику для каждой команды
-        $game->team->goals()->where('game_id', $game->id)->delete();
-        $game->opponent->goals()->where('game_id', $game->id)->delete();
         return $game->delete();
     }
 
 
     public static function updateDetails(Game $game, array $data)
     {
-        // Удаляем все голы для данной игры
-        $game->goals()->delete();
-
-        // Обновляем статус игры
-        $game->is_active = false;
-        $game->update($data);
-
-        // Удаляем голы и обновляем статистику для каждого игрока
-        foreach ($game->team->players as $player) {
-            $player->goals()->where('game_id', $game->id)->delete();
-        }
-
-        foreach ($game->opponent->players as $player) {
-            $player->goals()->where('game_id', $game->id)->delete();
-        }
-
-        // Обновляем статистику для каждой команды
-        $game->team->goals()->where('game_id', $game->id)->delete();
-        $game->opponent->goals()->where('game_id', $game->id)->delete();
-
-        return $game;
+        return $game->update($data);
     }
 
 

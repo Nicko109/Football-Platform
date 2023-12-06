@@ -17,7 +17,11 @@ class TeamResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'points' => $this->points
+            'points' => $this->points,
+            'goalsAll' => $this->goalsAll(),
+            'gamesTeamAll' => $this->gamesTeamAll(),
+            'gamesOpponentAll' => $this->gamesOpponentAll(),
+
         ];
     }
 }

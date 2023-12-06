@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('score')->nullable();
             $table->integer('points')->default(0);
             $table->string('win')->nullable();
+            $table->string('lose')->nullable();
+            $table->string('draw')->nullable();
             $table->boolean('is_active')->default(false);
             $table->foreignId('team_id')->index()->constrained('teams');
             $table->foreignId('opponent_id')->index()->constrained('teams');

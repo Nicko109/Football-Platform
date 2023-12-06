@@ -45,7 +45,7 @@ class Game extends Model
 
     public function opponentGoalsCount()
     {
-        return $this->goals()->where('opponent_id', $this->opponent_id)->sum('count');
+        return $this->goals()->where('team_id', $this->opponent_id)->sum('count');
     }
 
     public function getFormattedDateAttribute()
