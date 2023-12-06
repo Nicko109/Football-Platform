@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->date('date')->nullable();
+            $table->dateTime('date')->nullable();
             $table->integer('score')->nullable();
             $table->integer('points')->default(0);
             $table->string('win')->nullable();

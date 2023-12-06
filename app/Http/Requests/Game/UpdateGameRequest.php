@@ -26,7 +26,7 @@ class UpdateGameRequest extends FormRequest
             'is_active' => 'nullable|boolean',
             'score' => 'nullable|int',
             'points' => 'nullable|int',
-            'win' => 'required|in:team_id,opponent_id,null',
+            'win' => 'nullable|in:team_id,opponent_id,null',
             'team_id' => 'nullable|integer|exists:teams,id',
             'opponent_id' => 'nullable|different:team_id|exists:teams,id',
         ];
@@ -35,8 +35,6 @@ class UpdateGameRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Это поле необходимо для заполнения',
-            'title.string' => 'Данные должны соответствовать строчному типу',
             'points.int' => 'Данные должны соответствовать числовому типу',
             'opponent_id.different' => 'Выберите разные команды',
             'win.required' => 'Выберите результат игры',

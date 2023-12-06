@@ -36,27 +36,8 @@ class GameService
 
     public static function update(Game $game, array $data, array $goals)
     {
-        $teamId = $game->team_id;
-        $opponentId = $game->opponent_id;
-
-        $winningTeamId = null;
-        if ($data['win'] == 'team_id') {
-            $winningTeamId = $teamId;
-        } elseif ($data['win'] == 'opponent_id') {
-            $winningTeamId = $opponentId;
-        }
-
-        $game->fill($data);
-
-        if (!is_null($winningTeamId)) {
-            $game->win = $winningTeamId;
-            $game->is_active = true; // Устанавливаем is_active в true, если есть победитель
-        } else {
-            $game->is_active = false; // Если нет победителя, то матч неактивен
-        }
-
+        $game->is_active = true;
         $game->save();
-
 
         foreach ($goals as $teamId => $teamGoals) {
             foreach ($teamGoals as $playerId => $goalCount) {
@@ -77,6 +58,19 @@ class GameService
                 );
             }
         }
+
+
+        if ($game->teamGoalsCount() > $game->opponentGoalsCount()) {
+            $game->team->points += 3;
+        } elseif ($game->teamGoalsCount() < $game->opponentGoalsCount()) {
+            $game->opponent->points += 3;
+        } else {
+            $game->team->points += 1;
+            $game->opponent->points += 1;
+        }
+
+        $game->team->save();
+        $game->opponent->save();
 
 
         return $game;
@@ -124,4 +118,6 @@ class GameService
 
         return $game;
     }
+
+
 }

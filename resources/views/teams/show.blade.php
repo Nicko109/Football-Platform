@@ -34,6 +34,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Команда</th>
+                                    <th>Очки</th>
+                                    <th>Игры</th>
                                     <th>Голы</th>
                                 </tr>
                                 </thead>
@@ -41,6 +43,8 @@
                                 <tr>
                                     <td>{{ $team->id }}</td>
                                     <td class="text-wrap">{{ $team->title }}</td>
+                                    <td class="text-wrap">{{ $team->points }}</td>
+                                    <td class="text-wrap">{{ $team->gamesTeamAll() + $team->gamesOpponentAll() }}</td>
                                     <td class="text-wrap">{{ $team->goalsAll() }}</td>
                                 </tr>
                                 </tbody>

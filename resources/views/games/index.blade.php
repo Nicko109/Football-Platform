@@ -44,15 +44,23 @@
                                 @foreach($games as $game)
                                     <tr>
                                         <td>{{ $game->id }}</td>
-                                        <td>{{ $game->date }}</td>
+                                        <td>{{ $game->formattedDate }}</td>
                                         <td><a href="{{ route('admin.games.show', $game->id) }}">{{ $game->team->title }} - {{ $game->opponent->title }}</a></td>
                                         @if($game->is_active)
-                                        <td>{{ $game->teamGoalsCount() }}  - {{ $game->opponentGoalsCount() }}</a></td>
-                                        <td>{{ $game->win }}</td>
+                                            <td>{{ $game->teamGoalsCount() }}  - {{ $game->opponentGoalsCount() }}</td>
+                                            <td>
+                                                @if ($game->teamGoalsCount() > $game->opponentGoalsCount())
+                                                    {{ $game->team->title }}
+                                                @elseif ($game->teamGoalsCount() < $game->opponentGoalsCount())
+                                                    {{ $game->opponent->title }}
+                                                @else
+                                                    Ничья
+                                                @endif
+                                            </td>
                                         @else
-                                            <td>Матч не сыгран</td>
-                                            <td>Матч не сыгран</td>
-                                            @endif
+                                            <td>-:-</td>
+                                            <td>-:-</td>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>

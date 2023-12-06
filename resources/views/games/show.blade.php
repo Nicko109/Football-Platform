@@ -26,6 +26,7 @@
                 <div class="col-12">
                     <div class="mr-4 mb-4">
                         <a href="{{ route('admin.games.index') }}" class="btn btn-primary">Назад</a>
+                        <a href="{{ route('admin.games.edit', $game->id) }}" class="btn btn-warning ml-4">Играть</a>
                     </div>
                     <div class="card">
                         <div class="card-body table-responsive p-0">
@@ -42,14 +43,22 @@
                                 <tbody>
                                 <tr>
                                     <td>{{ $game->id }}</td>
-                                    <td>{{ $game->date }}</td>
+                                    <td>{{ $game->formattedDate }}</td>
                                     <td>{{ $game->team->title }}  - {{ $game->opponent->title }}</a></td>
                                     @if($game->is_active)
-                                        <td>{{ $game->teamGoalsCount() }}  - {{ $game->opponentGoalsCount() }}</a></td>
-                                        <td>{{ $game->win }}</td>
+                                        <td>{{ $game->teamGoalsCount() }}  - {{ $game->opponentGoalsCount() }}</td>
+                                        <td>
+                                            @if ($game->teamGoalsCount() > $game->opponentGoalsCount())
+                                                {{ $game->team->title }}
+                                            @elseif ($game->teamGoalsCount() < $game->opponentGoalsCount())
+                                                {{ $game->opponent->title }}
+                                            @else
+                                                Ничья
+                                            @endif
+                                        </td>
                                     @else
-                                        <td>Матч не сыгран</td>
-                                        <td>Матч не сыгран</td>
+                                        <td>-:-</td>
+                                        <td>-:-</td>
                                     @endif
                                 </tr>
                                 </tbody>
@@ -115,9 +124,6 @@
 
 
             <div class="card-header d-flex p-3">
-                <div class="mr-4">
-                    <a href="{{ route('admin.games.edit', $game->id) }}" class="btn btn-primary">Играть</a>
-                </div>
                 <div class="mr-4">
                     <a href="{{ route('admin.games.editDetails', $game->id) }}" class="btn btn-success">Редактировать</a>
                 </div>

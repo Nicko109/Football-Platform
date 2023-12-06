@@ -34,4 +34,13 @@ class Team extends Model
         return $this->goals()->sum('count');
     }
 
+    public function gamesOpponentAll()
+    {
+        return $this->hasMany(Game::class, 'opponent_id')->where('is_active', true)->count();
+    }
+
+    public function gamesTeamAll()
+    {
+        return $this->hasMany(Game::class, 'team_id')->where('is_active', true)->count();
+    }
 }

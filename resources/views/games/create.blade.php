@@ -29,7 +29,7 @@
                         <div class="form-group w-25">
                             <label for="date">Дата игры</label>
                             <div class="input-group">
-                                <input type="date" class="form-control" name="date" id="date"
+                                <input type="datetime-local" class="form-control" name="date" id="date"
                                        value="{{ old('date') }}">
                             </div>
                             @error('date')

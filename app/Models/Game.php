@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,7 +45,11 @@ class Game extends Model
 
     public function opponentGoalsCount()
     {
-        return $this->goals()->where('team_id', $this->opponent_id)->sum('count');
+        return $this->goals()->where('opponent_id', $this->opponent_id)->sum('count');
     }
 
+    public function getFormattedDateAttribute()
+    {
+        return Carbon::parse($this->date)->format('d.m.y H:i');
+    }
 }
