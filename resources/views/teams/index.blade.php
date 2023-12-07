@@ -58,9 +58,9 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div>
-                                {{ $teams->withQueryString()->links() }}
-                            </div>
+{{--                            <div>--}}
+{{--                                {{ $teams->withQueryString()->links() }}--}}
+{{--                            </div>--}}
                         </div>
 
                     </div>

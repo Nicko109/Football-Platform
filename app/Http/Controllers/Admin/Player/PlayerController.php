@@ -64,6 +64,10 @@ class PlayerController extends Controller
     public function update(UpdatePlayerRequest $request, Player $player)
     {
         $data = $request->validated();
+
+        $data = PlayerService::updateImage($player, $data);
+
+
         PlayerService::update($player, $data);
 
         return redirect()->route('admin.players.show', compact('player'));

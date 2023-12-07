@@ -28,6 +28,6 @@ class go extends Command
     public function handle()
     {
         $parser = new FootballParser();
-        $players = $parser->parseTeamPlayers('https://www.championat.com/football/_england/tournament/5467/teams/242805/pstat/');
+        $players = $parser->parseTeamPlayers('https://www.championat.com/football/_england/tournament/5467/teams/242797/pstat/');
     }
 }

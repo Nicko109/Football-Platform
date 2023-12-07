@@ -24,13 +24,28 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-6 col-12">
-                    <form action="{{route('admin.teams.update', $team->id)}}" method="post">
+                    <form action="{{ route('admin.teams.update', $team->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('patch')
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Название команды" name="title" id="title"
                                    value="{{ $team->title }}">
                             @error('title')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Редактировать изображение</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="image" id="image">
+                                    <label class="custom-file-label" for="image">{{ $team->image }}</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Загрузка</span>
+                                </div>
+                            </div>
+                            @error('image')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>

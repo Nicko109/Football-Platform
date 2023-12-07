@@ -18,11 +18,12 @@ class PlayerController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Player::class);
-        $players = PlayerService::index();
-
-        $players = PlayerResource::collection($players)->resolve();
-
         $isAdmin = auth()->user()->is_admin;
+        $players = Player::with('teams')->orderBy('name')->get();
+
+        $players->each(function ($player) {
+            $player->goalsAll = $player->goalsAll();
+        });
 
         return inertia('Player/Index', compact('players', 'isAdmin'));
     }

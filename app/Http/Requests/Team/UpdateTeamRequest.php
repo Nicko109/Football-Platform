@@ -27,6 +27,7 @@ class UpdateTeamRequest extends FormRequest
             'is_active' => 'nullable|boolean',
             'player_id' => 'required|array',
             'player_id.*' => 'integer|exists:players,id',
+            'image' => 'nullable',
         ];
     }
 

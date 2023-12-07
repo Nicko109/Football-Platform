@@ -23,41 +23,32 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-12">
+                <div class="col-6">
                     <div class="mr-4 mb-4">
                         <a href="{{ route('admin.players.index') }}" class="btn btn-primary">Назад</a>
                     </div>
                     <div class="card">
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-wrap">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Имя</th>
-                                    <th>Команда</th>
-                                    <th>Голы</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>{{ $player->id }}</td>
-                                    <td class="text-wrap">{{ $player->name }}</td>
-                                    @foreach($teams as $team)
-                                        <td class="text-wrap">{{ $team->title }}</td>
-                                    @endforeach
-                                    <td class="text-wrap">{{ $player->goalsAll() }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            @if(!is_null($player->meta))
-                            @foreach($player->meta as $key => $value)
-                                <p><b>{{$key}}</b> {{$value}}</p>
-                            @endforeach
-                                @endif
+                        <div class="card-body table-responsive p-3">
+                            <div class="row">
+                                <div class="col-md-8"> <!-- Description Column -->
+                                    <p><b>ID:</b> {{ $player->id }}</p>
+                                    <p><b>Имя:</b> {{ $player->name }}</p>
+                                    <p><b>Голы:</b> {{ $player->goalsAll() }}</p>
+                                    @if(!is_null($player->meta))
+                                        @foreach($player->meta as $key => $value)
+                                            <p><b>{{$key}}:</b> {{$value}}</p>
+                                        @endforeach
+                                    @endif
+                                </div>
+                                <div class="col-md-4"> <!-- Image Column -->
+                                    @if(!is_null($player->image))
+                                        <div class="d-flex justify-content-end">
+                                            <img src="{{ $player->image }}" alt="{{ $player->name }}" class="img-fluid">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                        @if(!is_null($player->image))
-                        <div><img src="{{$player->image}}" alt="{{$player->name}}"></div>
-                        @endif
                     </div>
                 </div>
             </div>

@@ -49,6 +49,9 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            @if(!is_null($team->image))
+                                <div><img src="{{$team->image}}" alt="{{$team->name}}"></div>
+                            @endif
                             <table class="table table-hover text-wrap">
                                 <label class="ml-3 mt-5">Cостав</label>
                                 <thead class="mt-4">

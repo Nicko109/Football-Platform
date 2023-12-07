@@ -7,6 +7,7 @@ use App\Models\Player;
 use App\Models\Team;
 use App\Http\Requests\Team\StoreTeamRequest;
 use App\Http\Requests\Team\UpdateTeamRequest;
+use App\Services\PlayerService;
 use App\Services\TeamService;
 use Illuminate\Support\Facades\Auth;
 use Mockery\Matcher\Not;
@@ -75,11 +76,11 @@ class TeamController extends Controller
     public function update(UpdateTeamRequest $request, Team $team)
     {
         $data = $request->validated();
+        TeamService::updateImage($team, $data);
         $previousPlayerIds = $team->players->pluck('id')->toArray();
         TeamService::update($team, $data, $previousPlayerIds);
 
         return redirect()->route('admin.teams.show', compact('team'));
-
     }
 
     /**

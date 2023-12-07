@@ -42,6 +42,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
 Route::get('/main', [\App\Http\Controllers\Main\Main\IndexController::class, 'index'])->name('main.index');
 Route::get('/tournament', [\App\Http\Controllers\Main\Tournament\TournamentController::class, 'index'])->name('tournament.index');
+Route::get('/teams', [\App\Http\Controllers\Main\Team\TeamController::class, 'index'])->name('team.index');
+Route::get('/teams/{team}', [\App\Http\Controllers\Main\Team\TeamController::class, 'show'])->name('team.show');
 Route::resource('/players', \App\Http\Controllers\Main\Player\PlayerController::class);
 
 });

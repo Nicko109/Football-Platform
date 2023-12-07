@@ -24,13 +24,28 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-6 col-12">
-                    <form action="{{route('admin.teams.store')}}" method="post">
+                    <form action="{{route('admin.teams.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="title">Добавить название команды</label>
                             <input type="text" class="form-control" placeholder="Название команды" name="title" id="title"
                                    value="{{old('title')}}">
                             @error('title')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Добавить изображение</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="image" id="exampleInputFile">
+                                    <label class="custom-file-label" for="exampleInputFile">Выберите изображение</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Загрузка</span>
+                                </div>
+                            </div>
+                            @error('image')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>

@@ -21,6 +21,7 @@ class TeamResource extends JsonResource
             'goalsAll' => $this->goalsAll(),
             'gamesTeamAll' => $this->gamesTeamAll(),
             'gamesOpponentAll' => $this->gamesOpponentAll(),
+            'image' => $this->image,
 
         ];
     }
