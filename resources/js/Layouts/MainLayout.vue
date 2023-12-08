@@ -9,6 +9,9 @@
         <div class="form-group mb-4">
             <Link :href="route('team.index')" class="inline-block bg-yellow-600 px-3 py-2 text-white">Команды</Link>
         </div>
+        <div class="form-group mb-4">
+            <Link :href="route('game.index')" class="inline-block bg-purple-600 px-3 py-2 text-white">Игры</Link>
+        </div>
         <div v-if="isAdmin" class="form-group mb-4">
             <a :href="route('admin.main.index')" class="inline-block bg-orange-600 px-3 py-2 text-white">Админ</a>
         </div>

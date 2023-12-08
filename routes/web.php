@@ -44,6 +44,8 @@ Route::get('/main', [\App\Http\Controllers\Main\Main\IndexController::class, 'in
 Route::get('/tournament', [\App\Http\Controllers\Main\Tournament\TournamentController::class, 'index'])->name('tournament.index');
 Route::get('/teams', [\App\Http\Controllers\Main\Team\TeamController::class, 'index'])->name('team.index');
 Route::get('/teams/{team}', [\App\Http\Controllers\Main\Team\TeamController::class, 'show'])->name('team.show');
+    Route::get('/games', [\App\Http\Controllers\Main\Game\GameController::class, 'index'])->name('game.index');
+    Route::get('/games/{game}', [\App\Http\Controllers\Main\Game\GameController::class, 'show'])->name('game.show');
 Route::resource('/players', \App\Http\Controllers\Main\Player\PlayerController::class);
 
 });

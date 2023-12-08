@@ -19,9 +19,12 @@
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap"> <Link :href="route('players.show', player.id)">{{ player.name }} </Link></td>
 
                             <td v-for="(team) in player.teams" class="flex items-center">
-                                <img v-if="team.image" :src="team.image" alt="Team Icon" style="width: 50px; height: auto;" class="mr-2">
-                                <span class="text-sm text-gray-900 font-semibold">{{ team.title }}</span>
+
+                                <Link :href="route('team.show', team.id)"> <img v-if="team.image" :src="team.image" alt="Team Icon" style="width: 50px; height: auto;" class="mr-2"> </Link>
+                                <Link :href="route('team.show', team.id)"><span class="text-sm text-gray-900 font-semibold">{{ team.title }}</span></Link>
+
                             </td>
+
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">{{ player.goalsAll }}</td>
                         </tr>
                         </tbody>
@@ -31,19 +34,6 @@
         </div>
         </div>
 </template>
-
-
-
-
-
-<!--    <div class="max-w-screen-md w-full mx-auto">-->
-<!--        <div class="mb-6 pb-6 border-b border-gray-400" v-for="player in players" :key="player.id">-->
-<!--            <Link :href="route('players.show', player.id)">-->
-<!--                <h1 style="word-break: break-word;" class="pb-4 text-xl link-text">{{ player.name }}</h1>-->
-<!--            </Link>-->
-<!--        </div>-->
-<!--    </div>-->
-
 
 <script>
 import MainLayout from "@/Layouts/MainLayout.vue";

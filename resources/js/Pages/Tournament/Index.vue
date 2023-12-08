@@ -20,8 +20,8 @@
                         <tbody>
                         <tr class="border-b" v-for="(team, index) in teams" :key="index">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ index + 1 }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><img style="width: 50px; height: auto;" :src="team.image" :alt="team.id"></td>
-                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">{{ team.title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"> <Link :href="route('team.show', team.id)" class="block"><img style="width: 50px; height: auto;" :src="team.image" :alt="team.id"> </Link></td>
+                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap"><Link :href="route('team.show', team.id)" class="block">{{ team.title }}</Link></td>
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">{{ team.gamesTeamAll + team.gamesOpponentAll }}</td>
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">{{ team.wins }}</td>
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">{{ team.draws }}</td>

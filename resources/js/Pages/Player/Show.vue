@@ -8,7 +8,6 @@
                 <h1 style="word-break: break-word;" class="pb-4 text-xl">{{ player.name }}</h1>
                 <div class="card">
                     <div class="card-body table-responsive p-0">
-                                <p><b>Имя:</b> {{ player.name }}</p>
                                 <p><b>Голы:</b> {{ player.goalsAll }}</p>
                         <div v-if="player.meta">
                             <div v-for="(value, key) in player.meta" :key="key">

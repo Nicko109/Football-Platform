@@ -18,14 +18,6 @@ class TeamController extends Controller
         $isAdmin = auth()->user()->is_admin;
 
         $teams = Team::all()->sortByDesc('points')->values();
-        $teams->each(function ($team) {
-            $team->goalsAll = $team->goalsAll();
-            $team->wins = $team->wins();
-            $team->losses = $team->losses();
-            $team->draws = $team->draws();
-            $team->gamesTeamAll = $team->gamesTeamAll();
-            $team->gamesOpponentAll = $team->gamesOpponentAll();
-        });
 
 
         return inertia('Team/Index', compact('isAdmin', 'teams'));
@@ -34,7 +26,11 @@ class TeamController extends Controller
     public function show(Team $team)
     {
 
-
-        return inertia('Team/Show', compact('team'));
+        $isAdmin = auth()->user()->is_admin;
+        $players = $team->players()->get();
+        $players->each(function ($player) {
+            $player->goalsAll = $player->goalsAll();
+        });
+        return inertia('Team/Show', compact('team', 'isAdmin', 'players'));
     }
 }

@@ -69,58 +69,70 @@
 
                 </div>
             </div>
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h3 class="card-title">Состав команды {{ $game->team->title }}</h3>
-                </div>
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-wrap">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Имя игрока</th>
-                            <th>Забитых голов</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($game->team->players as $player)
+            @if($game->team->players->filter(function($player) use ($game) {
+      return $player->goalsInGame($game) > 0;
+ })->isNotEmpty())
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Голы команды {{ $game->team->title }}</h3>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-wrap">
+                            <thead>
                             <tr>
-                                <td>{{ $player->id }}</td>
-                                <td>{{ $player->name }}</td>
-                                <td>{{ $player->goalsInGame($game) }}</td>
+                                <th>ID</th>
+                                <th>Имя игрока</th>
+                                <th>Забитых голов</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach ($game->team->players->filter(function($player) use ($game) {
+                                       return $player->goalsInGame($game) > 0;
+                                   }) as $player)
+                                <tr>
+                                    <td>{{ $player->id }}</td>
+                                    <td>{{ $player->name }}</td>
+                                    <td>{{ $player->goalsInGame($game) }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+        @endif
 
             <!-- Display roster of the second team -->
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h3 class="card-title">Состав команды {{ $game->opponent->title }}</h3>
-                </div>
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-wrap">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Имя игрока</th>
-                            <th>Забитых голов</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($game->opponent->players as $player)
+            @if($game->opponent->players->filter(function($player) use ($game) {
+     return $player->goalsInGame($game) > 0;
+})->isNotEmpty())
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Голы команды {{ $game->opponent->title }}</h3>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-wrap">
+                            <thead>
                             <tr>
-                                <td>{{ $player->id }}</td>
-                                <td>{{ $player->name }}</td>
-                                <td>{{ $player->goalsInGame($game) }}</td>
+                                <th>ID</th>
+                                <th>Имя игрока</th>
+                                <th>Забитых голов</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach ($game->opponent->players->filter(function($player) use ($game) {
+                                     return $player->goalsInGame($game) > 0;
+                                 }) as $player)
+                                <tr>
+                                    <td>{{ $player->id }}</td>
+                                    <td>{{ $player->name }}</td>
+                                    <td>{{ $player->goalsInGame($game) }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            @endif
 
 
             <div class="card-header d-flex p-3">

@@ -1,58 +1,37 @@
 <template>
-    <div class="max-w-screen-md w-full mx-auto">
-        <div class="form-group mb-4">
-            <Link :href="route('team.index')" class="inline-block bg-sky-600 px-3 py-2 text-white">Назад</Link>
-        </div>
-    </div>
-    <div v-if="team.id">
-        <div class="card">
-            <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-wrap">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Команда</th>
-                        <th>Очки</th>
-<!--                        <th>Игры</th>-->
-<!--                        <th>Голы</th>-->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{{ team.id }}</td>
-                        <td class="text-wrap">{{ team.title }}</td>
-                        <td class="text-wrap">{{ team.points }}</td>
-<!--                        <td class="text-wrap">{{ team.gamesTeamAll() + team.gamesOpponentAll() }}</td>-->
-<!--                        <td class="text-wrap">{{ team.goalsAll() }}</td>-->
-                    </tr>
-                    </tbody>
-                </table>
+    <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden">
+                    <table class="w-3/4 max-w-screen-md mx-auto">
+                        <thead class="border-b">
+                        <tr>
+                            <th scope="col" class="text-lg font-bold text-gray-900 px-6 py-4 text-left">№</th>
+                            <th scope="col" class="text-lg font-bold text-gray-900 px-6 py-4 text-left">Игрок</th>
+                            <th scope="col" class="text-lg font-bold text-gray-900 px-6 py-4 text-left">Команда</th>
+                            <th scope="col" class="text-lg font-bold text-gray-900 px-6 py-4 text-left">Голы</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="border-b" v-for="(player, index) in players" :key="index">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ index + 1 }}</td>
 
-                <div v-if="team.image">
-                    <div><img :src="team.image" :alt="team.name"></div>
+                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap"> <Link :href="route('players.show', player.id)">{{ player.name }} </Link></td>
+
+                            <td class="flex items-center">
+
+                                <Link :href="route('team.show', team.id)"> <img v-if="team.image" :src="team.image" alt="Team Icon" style="width: 50px; height: auto;" class="mr-2"> </Link>
+                                <Link :href="route('team.show', team.id)"><span class="text-sm text-gray-900 font-semibold">{{ team.title }}</span></Link>
+
+                            </td>
+                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">{{ player.goalsAll }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-<!--                <table class="table table-hover text-wrap">-->
-<!--                    <label class="ml-3 mt-5">Cостав</label>-->
-<!--                    <thead class="mt-4">-->
-<!--                    <tr>-->
-<!--                        <th>ID</th>-->
-<!--                        <th>Имя Игрока</th>-->
-<!--                        <th>Голы</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    <tr v-for="player in team.players" :key="player.id">-->
-<!--                        <td>{{ player.id }}</td>-->
-<!--                        <td>{{ player.name }}</td>-->
-<!--                        <td>{{ player.goalsAll() }}</td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
             </div>
         </div>
-        </div>
-
+    </div>
 </template>
 
 <script>
@@ -63,7 +42,7 @@ import axios from "axios";
 export default {
     name: "Show",
 
-    props:['team', "isAdmin"],
+    props:['team', "isAdmin", 'players'],
     data() {
         return {
             errors: [],
