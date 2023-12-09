@@ -26,6 +26,7 @@ class StorePlayerRequest extends FormRequest
             'goals' => 'nullable|int',
             'is_active' => 'nullable|boolean',
             'image' => 'nullable|file',
+            'content' => 'nullable|string',
         ];
     }
 

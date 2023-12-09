@@ -15,12 +15,17 @@ class TeamController extends Controller
 {
     public function index()
     {
+        $data = Team::paginate(3);
         $isAdmin = auth()->user()->is_admin;
 
-        $teams = Team::all()->sortByDesc('points')->values();
+        $teams = $data->getCollection();
 
 
-        return inertia('Team/Index', compact('isAdmin', 'teams'));
+        return inertia('Team/Index',  [
+            'teams' => $teams,
+            'paginationLinks' => $data,
+            'isAdmin' => $isAdmin
+        ]);
     }
 
     public function show(Team $team)

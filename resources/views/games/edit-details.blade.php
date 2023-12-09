@@ -27,7 +27,7 @@
                     <form action="{{route('admin.games.updateDetails', $game->id)}}" method="post">
                         @csrf
                         @method('patch')
-                        <div class="form-group w-25">
+                        <div class="form-group w-50">
                             <label for="date">Дата игры</label>
                             <div class="input-group">
                                 <input type="datetime-local" class="form-control" name="date" id="date"

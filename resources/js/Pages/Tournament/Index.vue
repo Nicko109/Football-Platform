@@ -37,24 +37,30 @@
     </div>
 
 
+  <Pagination :links="paginationLinks.links"/>
 </template>
 
 <script>
 import MainLayout from "@/Layouts/MainLayout.vue";
 import { Link } from "@inertiajs/vue3";
+import Pagination from "@/Pages/Pagination/Pagination.vue";
 import axios from "axios";
 
 export default {
     name: "Index",
 
-    props: ["teams", "isAdmin"],
+  props: {
+    paginationLinks: Array,
+    teams: Array,
+    isAdmin: Boolean,
+  },
     data() {
         return {
             errors: {},
         };
     },
 
-    components: { Link },
+  components: {Pagination, Link},
 
     layout: MainLayout,
 };

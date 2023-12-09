@@ -49,6 +49,15 @@
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <div>
+                                <label for="content">Редактировать описание</label>
+                            </div>
+                            <textarea id="content" name="content" rows="8" cols="80">{{ $player->content }}</textarea>
+                            @error('content')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="form-group mt-3">
                             <input type="submit" class="btn btn-success" value="Редактировать">
                         </div>

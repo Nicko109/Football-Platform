@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Выберите неактивных игроков</label>
+                            <label>Выберите свободных игроков</label>
                             <select name="player_id[]" class="form-control" multiple style="height: 200px;">
                                 @foreach($inactivePlayers as $player)
                                     <option value="{{ $player->id }}" {{ in_array($player->id, (array) old('player_id')) ? 'selected' : '' }}>

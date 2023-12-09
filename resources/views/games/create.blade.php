@@ -26,7 +26,7 @@
                 <div class="col-lg-6 col-12">
                     <form action="{{ route('admin.games.store') }}" method="post">
                         @csrf
-                        <div class="form-group w-25">
+                        <div class="form-group w-50">
                             <label for="date">Дата игры</label>
                             <div class="input-group">
                                 <input type="datetime-local" class="form-control" name="date" id="date"

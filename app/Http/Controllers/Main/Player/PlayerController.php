@@ -25,6 +25,7 @@ class PlayerController extends Controller
             $player->goalsAll = $player->goalsAll();
         });
 
+
         return inertia('Player/Index', compact('players', 'isAdmin'));
     }
 

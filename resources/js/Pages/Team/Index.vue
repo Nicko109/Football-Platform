@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap mt-6">
         <div
             class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 mb-6 pb-6 sm:px-3 md:px-4 lg:px-6 mx-auto"
             v-for="team in teams"
@@ -14,24 +14,30 @@
             </Link>
         </div>
     </div>
+  <Pagination :links="paginationLinks.links"/>
 </template>
 
 <script>
 import MainLayout from "@/Layouts/MainLayout.vue";
 import { Link } from "@inertiajs/vue3";
+import Pagination from "@/Pages/Pagination/Pagination.vue";
 import axios from "axios";
 
 export default {
     name: "Index",
 
-    props: ["teams", "isAdmin"],
+  props: {
+    paginationLinks: Array,
+    teams: Array,
+    isAdmin: Boolean,
+  },
     data() {
         return {
             errors: {},
         };
     },
 
-    components: { Link },
+  components: {Pagination, Link},
 
     layout: MainLayout,
 };

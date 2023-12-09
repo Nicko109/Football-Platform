@@ -49,6 +49,13 @@
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="content">Добавить описание</label>
+                            <textarea name="content" rows="8" cols="80" id="content">{{ old('content') }}</textarea>
+                            @error('content')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="form-group mt-3">
                             <input type="submit" class="btn btn-primary" value="Добавить">
                         </div>

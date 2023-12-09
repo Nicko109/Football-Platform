@@ -34,6 +34,9 @@
                                     <p><b>ID:</b> {{ $player->id }}</p>
                                     <p><b>Имя:</b> {{ $player->name }}</p>
                                     <p><b>Голы:</b> {{ $player->goalsAll() }}</p>
+                                    @if(!is_null($player->content))
+                                        <p>{{ $player->content }}</p>
+                                    @endif
                                     @if(!is_null($player->meta))
                                         @foreach($player->meta as $key => $value)
                                             <p><b>{{$key}}:</b> {{$value}}</p>

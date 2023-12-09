@@ -21,7 +21,7 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <p class="animation__shake">Мой Блог</p>
+        <p class="animation__shake">Английская Премьер Лига</p>
     </div>
 
     <!-- Navbar -->
@@ -53,7 +53,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{ route('admin.main.index') }}" class="brand-link">
-            <span class="brand-text font-weight-light">Мой Блог</span>
+            <span class="brand-text font-weight-light">Английская Премьер Лига</span>
         </a>
 
         <!-- Sidebar -->
@@ -98,7 +98,7 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-{{ now()->year }} <a href="{{ route('admin.main.index') }}">Мой Блог</a>.</strong>
+        <strong>Copyright &copy; 2014-{{ now()->year }} <a href="{{ route('admin.main.index') }}">Английская Премьер Лига</a>.</strong>
         Все права защищены.
     </footer>
 

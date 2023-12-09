@@ -26,6 +26,7 @@ class UpdatePlayerRequest extends FormRequest
             'goals' => 'nullable|int',
             'is_active' => 'nullable|boolean',
             'image' => 'nullable',
+            'content' => 'nullable|string',
         ];
     }
 

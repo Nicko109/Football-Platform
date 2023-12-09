@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Player;
 
+use App\Http\Resources\Team\TeamResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +20,7 @@ class PlayerResource extends JsonResource
             'name' => $this->name,
             'goalsAll' => $this->goalsAll(),
             'image' => $this->image,
-            'meta' => $this->meta
+            'meta' => $this->meta,
         ];
     }
 }

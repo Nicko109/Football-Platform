@@ -16,8 +16,8 @@ class TournamentController extends Controller
     public function index()
     {
         $isAdmin = auth()->user()->is_admin;
-
-        $teams = Team::all()->sortByDesc('points')->values();
+        $data = Team::orderByDesc('points')->paginate(6);
+        $teams = $data->getCollection();
         $teams->each(function ($team) {
             $team->goalsAll = $team->goalsAll();
             $team->wins = $team->wins();
@@ -28,6 +28,10 @@ class TournamentController extends Controller
         });
 
 
-        return inertia('Tournament/Index', compact('isAdmin', 'teams'));
+        return inertia('Tournament/Index', [
+            'teams' => $teams,
+            'paginationLinks' => $data,
+            'isAdmin' => $isAdmin
+        ]);
     }
 }

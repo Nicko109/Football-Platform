@@ -1,8 +1,5 @@
 <template>
-    <div class="max-w-screen-md w-full mx-auto">
-        <div class="form-group mb-4">
-            <Link :href="route('players.index')" class="inline-block bg-sky-600 px-3 py-2 text-white">Назад</Link>
-        </div>
+    <div class="max-w-screen-md w-full mx-auto mt-6">
         <div class="flex items-center">
             <div class="w-2/3">
                 <h1 style="word-break: break-word;" class="pb-4 text-xl">{{ player.name }}</h1>
